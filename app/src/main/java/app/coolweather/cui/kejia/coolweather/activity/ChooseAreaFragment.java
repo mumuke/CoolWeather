@@ -118,7 +118,7 @@ public class ChooseAreaFragment extends Fragment {
     private void queryCities() {
         mTvTitle.setText(selectedProvince.getProvinceName());
         mBtnBack.setVisibility(View.VISIBLE);
-        cityList = DataSupport.where("province=?", String.valueOf(selectedProvince.getId())).find(City.class);
+        cityList = DataSupport.where("provinceId=?", String.valueOf(selectedProvince.getId())).find(City.class);
         if (cityList.size() > 0) {
             dataList.clear();
             for (City city : cityList) {
@@ -136,7 +136,7 @@ public class ChooseAreaFragment extends Fragment {
     private void queryCounties() {
         mTvTitle.setText(selectedCity.getCityName());
         mBtnBack.setVisibility(View.VISIBLE);
-        countyList = DataSupport.where("city_id=?", String.valueOf(selectedCity.getId())).find(County.class);
+        countyList = DataSupport.where("cityId=?", String.valueOf(selectedCity.getId())).find(County.class);
         if (countyList.size() > 0) {
             dataList.clear();
             for (County county : countyList) {
@@ -173,7 +173,7 @@ public class ChooseAreaFragment extends Fragment {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String responseText = response.body().toString();
+                String responseText = response.body().string();
                 boolean result = false;
                 if ("province".equals(type)) {
                     result = Utility.handleProvincesResponse(responseText);
