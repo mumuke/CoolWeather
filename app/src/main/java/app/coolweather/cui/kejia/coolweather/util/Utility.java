@@ -2,6 +2,8 @@ package app.coolweather.cui.kejia.coolweather.util;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,6 +11,7 @@ import org.json.JSONObject;
 import app.coolweather.cui.kejia.coolweather.db.City;
 import app.coolweather.cui.kejia.coolweather.db.County;
 import app.coolweather.cui.kejia.coolweather.db.Province;
+import app.coolweather.cui.kejia.coolweather.gson.Weather;
 
 /**
  * Created by ckj on 2017/7/25.
@@ -77,4 +80,23 @@ public class Utility {
         }
         return false;
     }
+
+    /**
+     * 将返回的json数据解析成weather实体类
+     *
+     * @param response
+     * @return
+     */
+    public static Weather handleWeatherResponse(String response) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            String weatherContent = jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weatherContent, Weather.class);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

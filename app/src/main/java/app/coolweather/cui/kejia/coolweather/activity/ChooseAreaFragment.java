@@ -97,6 +97,9 @@ public class ChooseAreaFragment extends Fragment {
         queryProvinces();
     }
 
+    /**
+     * 查询全部省
+     */
     private void queryProvinces() {
         mTvTitle.setText("中国");
         mBtnBack.setVisibility(View.GONE);
@@ -115,6 +118,9 @@ public class ChooseAreaFragment extends Fragment {
         }
     }
 
+    /**
+     * 查询某省的全部市级信息
+     */
     private void queryCities() {
         mTvTitle.setText(selectedProvince.getProvinceName());
         mBtnBack.setVisibility(View.VISIBLE);
@@ -133,6 +139,9 @@ public class ChooseAreaFragment extends Fragment {
         }
     }
 
+    /**
+     * 查询某市的全部城镇信息
+     */
     private void queryCounties() {
         mTvTitle.setText(selectedCity.getCityName());
         mBtnBack.setVisibility(View.VISIBLE);
